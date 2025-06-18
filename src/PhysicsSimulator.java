@@ -2,11 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PhysicsSimulator extends JPanel {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         createGUI();
     }
 
-    public static void createGUI() throws InterruptedException {
+    public static void createGUI() {
         JFrame frame = new JFrame("Physics Sim");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -18,11 +18,14 @@ public class PhysicsSimulator extends JPanel {
         frame.setVisible(true);
     }
 
-    public PhysicsSimulator() throws InterruptedException {
+    public PhysicsSimulator() {
         super(null);
         setPreferredSize(new Dimension(800, 650));
         setBackground(Color.black);
-        add(new MotionPanel());
+        //add(new MotionPanel());
+        add(new CollisionsPanel());
+
+
 
     }
 }

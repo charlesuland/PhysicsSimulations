@@ -10,7 +10,7 @@ public class MotionPanel extends JPanel {
 
     ArrayList<Ball> balls;
 
-    public MotionPanel() throws InterruptedException {
+    public MotionPanel() {
         super(null);
         setBounds(100, 25, 600, 600);
         setBackground(Color.GRAY);
@@ -27,24 +27,30 @@ public class MotionPanel extends JPanel {
         };
         Timer renderingTimer = new Timer(renderingTimerDelay, renderingPerformer);
         renderingTimer.start();
-/*        int addBallTimerDelay = 500; // 2/s
-        ActionListener addBallPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                addBall();
-            }
-        };
-        Timer addBallTimer = new Timer(addBallTimerDelay, addBallPerformer);*/
 
         balls = new ArrayList<>();
-        for(int i = 0; i < 12; i++) {
-            if(i % 2 == 1) {
-                balls.add(new Ball(50 + 20 * 2* (i) + 20, 100));
-            } else{
-                balls.add(new Ball(50 + 20 * 2* (i) + 20, 100));
+        int addBallTimerDelay = 200; // 2/s
+        ActionListener addBallPerformer = new ActionListener() {
+            int ballCounter = 0;
+            public void actionPerformed(ActionEvent e) {
+                if(ballCounter % 2 == 1) {
+                    balls.add(new Ball(50 + 20 * 2* (ballCounter) + 20, 100));
+                } else{
+                    balls.add(new Ball(50 + 20 * 2* (ballCounter) + 20, 100));
+                }
+                balls.get(ballCounter).setColor(new Color(Color.HSBtoRGB( ballCounter/360.0f *30, 1, 1)));
+                ballCounter++;
+                if(ballCounter > 11) {
+                    Timer t = (Timer) e.getSource();
+                    t.stop();
+                }
             }
-            balls.get(i).setColor(new Color(Color.HSBtoRGB( i/360.0f *30, 1, 1)));
-            Thread.sleep(200);
-        }
+        };
+        Timer addBallTimer = new Timer(addBallTimerDelay, addBallPerformer);
+        addBallTimer.start();
+
+
+
 
 
 
@@ -101,8 +107,8 @@ class Ball{
     double oldX;
     double oldY;
     double accelerationX;
-    double accelerationY = 9.8;
-    int radius = 20;
+    double accelerationY = 20;
+    static int radius = 5;
     Color rgb;
 
 
@@ -112,6 +118,13 @@ class Ball{
         this.x = oldX = x;
         this.y = oldY = y;
 
+    }
+    public Ball(int x, int y, int oldX, int oldY, Color c) {
+        this.x =x;
+        this.y = y;
+        this.oldX = oldX;
+        this.oldY = oldY;
+        this.rgb = c;
     }
     public void setColor(Color c) {
         rgb = c;

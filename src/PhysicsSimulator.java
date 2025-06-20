@@ -24,7 +24,7 @@ public class PhysicsSimulator extends JPanel {
         setBackground(Color.black);
         //add(new MotionPanel());
         add(new CollisionsPanel());
-
+        add(new CollisionsOptimizationPanel());
 
 
     }

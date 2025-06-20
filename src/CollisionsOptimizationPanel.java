@@ -14,5 +14,7 @@ public class CollisionsOptimizationPanel extends JPanel {
         super(null);
         setBounds(100, 25, 600, 600);
         setBackground(Color.GRAY);
+
+
     }
 }

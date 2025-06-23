@@ -129,7 +129,7 @@ public class CollisionsPanel extends JPanel {
 
         for (Ball b : balls) {
             g.setColor(b.rgb);
-            g.fillOval((int) b.x - Ball.radius, (int) b.y - Ball.radius, Ball.radius * 2, Ball.radius * 2);
+            g.fillOval((int) b.x - b.radius, (int) b.y - b.radius, b.radius * 2, b.radius * 2);
         }
     }
 
